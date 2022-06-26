@@ -1,0 +1,41 @@
+main{
+    width: 100%;
+    min-height: 820px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    color: rgb(240, 240, 240);
+    background-color: rgb(13, 13, 13);
+}
+
+main *{
+    width: 100%;
+    text-align: center;
+}
+
+main div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+main div a{
+    width: 30%;
+    font-size: 250%;
+    padding: 25px;
+
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(240, 240, 240);
+}
+
+main div .singIn{
+    background-color: rgb(2, 216, 246);
+}
+
+main div .singUp{
+    background-color: rgb(6, 158, 255);
+}

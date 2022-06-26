@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head')%>
+        <link rel="stylesheet" href="../partials.css">
+        <link rel="stylesheet" href="../sing.css">
+        <title>Sing Up</title>
+    </head>
+
+    <body>
+        
+        <nav>
+            <a href="/"><h2>JSMAIL</h2></a>
+        </nav>
+
+        <main>
+
+            <h3>Sing In</h3>
+
+            <form action="/users/singUp" method="post">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name">
+                </div>
+                <div>
+                    <label for="email">email:</label>
+                    <input type="text" name="email">
+                </div>
+                <div>
+                    <label for="password">password:</label>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <label for="confirmPassword">Confirm password:</label>
+                    <input type="password" name="confirmPassword">
+                </div>
+                <div class="buttons">
+                    <a href="/">Go Back</a>
+                    <button type="submit">Sing Up</button>
+                </div>
+            </form>
+
+        </main>
+
+        <%- include('../partials/footer')%>
+
+    </body> 
+
+</html>

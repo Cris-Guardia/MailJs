@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('partials/head')%>
+        <link rel="stylesheet" href="../inbox.css">
+        <link rel="stylesheet" href="../partials.css">
+        <title>Main</title>
+    </head>
+
+    <body>
+        <%- include('partials/navigation')%>
+    
+        <main>
+
+            <section>
+                <div class="inbox"><h3>INBOX</h3></div>
+                <div><h5>Recibidos 000000000</h5></div>
+            </section>
+
+            <ul>
+                <% mails.forEach(function(mail){%>
+                    <li>
+                        <a href="">
+                            <h6>
+                                <%= mail.mailBy %>
+                            </h6>
+                            <h6>
+                                <%= mail.title %>
+                            </h6>
+                            <h6>
+                                <%= format(mail.created_at) %>
+                            </h6>
+                        </a>
+                    </li>
+                <% })%>
+                <li><a href="">a</a> <h6>h6</h6></li>
+                <li><a href="">a</a> <h6>h6</h6></li>
+                <li><a href="">a</a> <h6>h6</h6></li>
+                <li><a href="">a</a> <h6>h6</h6></li>
+            </ul>
+
+        </main>
+
+        <%- include('partials/footer')%>
+
+    </body> 
+
+</html>

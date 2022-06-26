@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('partials/head')%>
+        <link rel="stylesheet" href="../partials.css">
+        <link rel="stylesheet" href="../write.css">
+        <title>Main</title>
+    </head>
+
+    <body>
+        <%- include('partials/navigation')%>
+    
+        <main>
+
+            <form action="/write" method="post">
+                <div>
+                    <span>For:</span>
+                    <input type="text" name="mailFor">
+                </div>
+                <div>
+                    <span>Title:</span>
+                    <input type="text" name="title">
+                </div>
+                <!--<span>Description:</span>-->
+                <textarea name="description" id="" cols="30" rows="10" placeholder="Description:"></textarea>
+                <div class="buttons">
+                    <a href="/inbox">Go back</a>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+
+        </main>
+
+        <%- include('partials/footer')%>
+
+    </body> 
+
+</html>
