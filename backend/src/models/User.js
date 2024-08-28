@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt  = require('bcryptjs');
+const MailSchema = require('./Mail');
 
 const UserSchema = new Schema({
     name: {type: String, required: true},
     email: {type: String, required: true},
-    password: {type: String, required: true}
+    dateBirth: {type: Date, required: true},
+    password: {type: String, required: true},
+    mails: [MailSchema]
 });
 
 UserSchema.methods.encryptPassword = async (password) => {

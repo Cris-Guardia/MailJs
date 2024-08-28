@@ -1,28 +1,11 @@
 {
-  "name": "jsmail",
+  "name": "mailjs",
   "version": "1.0.0",
-  "description": "Email system made with javascript",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Cristofer Guardia",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "brcypt": "^1.0.1",
-    "connect-flash": "^0.1.1",
-    "ejs": "^3.1.7",
-    "express": "^4.18.1",
-    "express-session": "^1.17.3",
-    "mongoose": "^6.3.3",
-    "passport": "^0.5.3",
-    "passport-local": "^1.0.0",
-    "timeago.js": "^4.0.2",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
-  }
+  "author": "",
+  "license": "ISC"
 }

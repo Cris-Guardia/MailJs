@@ -5,32 +5,52 @@ const router = require('express').Router();
 //////////////////////////THIS IS SING IN
 
 router.get('/users/singIn', (req, res)=>{
-    res.render('users/singIn.ejs');
+    res.send('sing in');
 });
 
-router.post('/users/singIn', passport.authenticate('local', {
-    successRedirect: '/inbox',
-    failureRedirect: '/users/singin',
-    failureFlash: true
-}));
+router.post('/users/singIn', (req, res, next)=>{
+    passport.authenticate('local', (err, user, info) => {
+        if(err){
+            return next(err);
+        }
+        else if(!user){
+            return res.send(`${info.message}`);
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            else{
+                return res.redirect('/inbox');
+            }
+        });
+    })(req, res, next);
+});
 
 //////////////////////////THIS IS SING UP
 
 router.get('/users/singUp', (req, res)=>{
-    res.render('users/singUp.ejs');
+    res.send('sing Up');
 });
 
-router.post('/users/singUp', async (req, res)=>{
-    const {name, email, password, confirmPassword} = req.body;
-    const errors = [];
+function isValidEmail(email){
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
 
-    res.setHeader('Content-Type', 'text/html');
+router.post('/users/singUp', async (req, res)=>{
+    const {name, email, dateBirth, password, confirmPassword} = req.body;
+    const errors = [];
 
     if(name.length <= 0){
         errors.push({text: 'there are not a name'});
     }
-    if(email.length <= 0){
-        errors.push({text: 'there are not an email'});
+    if(!email || !isValidEmail(email)){
+        console.log(!isValidEmail(email));
+        errors.push({text: 'there are not a valid email'});
+    }
+    if(dateBirth == null){
+        errors.push({text: 'there are not a date of birth'});
     }
     if(password.length < 4){
         errors.push({text: 'there are not a password'});
@@ -42,24 +62,27 @@ router.post('/users/singUp', async (req, res)=>{
     //////////////////////////CHECK EMAIL
 
     if(errors.length > 0){
-        console.log('\n');
         console.log('there are errors');
-        res.redirect('/users/singUp');
+        res.send('ta mal');
     }
     else{
         console.log('\n');
         console.log('The email will be finded');
+        
         const emailUser = await User.findOne({ email }).catch();
         console.log('The find ends');
+
         if(emailUser){
             console.log('Email already exist\n');
-            res.redirect('/users/singUp');
+            res.send('ta mal, el mail existe');
         }
         else{
             console.log('there are not any error\n');
-            const newUser = new User({name, email, password});
+            
+            const newUser = new User({name, email, dateBirth, password});
             newUser.password = await newUser.encryptPassword(password).catch();
             await newUser.save().catch();
+
             console.log('registered\n');
             res.redirect('/users/singIn');
         }
