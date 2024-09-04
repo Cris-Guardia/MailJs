@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const Mail = require('../models/Mail');
 const { ensureAuthenticated } = require('../middlewares/athenticated');
 
 router.get('/inbox', ensureAuthenticated, async (req, res)=>{
@@ -11,7 +12,7 @@ router.get('/inbox', ensureAuthenticated, async (req, res)=>{
             const {name, email, dateBirth, mails} = user;
             return res.send({name, email, dateBirth, mails});
         }
-        
+
         else{
             return res.redirect('something didnt work');
         }
@@ -37,6 +38,31 @@ router.get('/inbox/:id', ensureAuthenticated, async (req, res)=>{
 
     }catch(error){
         console.log(error);
+    }
+});
+
+router.post('/inbox', ensureAuthenticated, async (req, res)=>{
+    try{
+        const { search } = req.body
+        
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).send('Usuario no encontrado');
+        }
+
+        const searchRegex = new RegExp(search, 'i');
+
+        const filteredMails = user.mails.filter( mail =>
+            searchRegex.test(mail.title) ||
+            searchRegex.test(mail.description) ||
+            searchRegex.test(mail.address)
+        )
+
+        res.status(200).json(filteredMails);
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).send('Error del servidor');
     }
 });
 
